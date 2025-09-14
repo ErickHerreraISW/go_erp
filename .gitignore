@@ -1,0 +1,42 @@
+# ---- Go ----
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Módulos y caché
+vendor/
+go.sum
+*.swp
+
+# Archivos temporales
+*.log
+*.tmp
+*.bak
+
+# ---- IDE / Editor ----
+.vscode/
+.idea/
+*.iml
+*.code-workspace
+
+# ---- Sistema ----
+.DS_Store
+Thumbs.db
+
+# ---- Config ----
+.env
+configs/.env
+!configs/.env.example
+
+# ---- Docker ----
+/pgdata
+docker-compose.override.yml
+
+# ---- Herramientas de desarrollo ----
+.air.toml
+coverage.out
