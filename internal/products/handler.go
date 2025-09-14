@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ErickHerreraISW/go_erp/internal/pkg/response"
 	"github.com/go-chi/chi/v5"
-	"github.com/youruser/myapp/internal/pkg/response"
 )
 
 type Handler struct{ Svc Service }

@@ -3,14 +3,14 @@ package main
 import (
 	"net/http"
 
+	"github.com/ErickHerreraISW/go_erp/internal/config"
+	"github.com/ErickHerreraISW/go_erp/internal/database"
+	apphttp "github.com/ErickHerreraISW/go_erp/internal/http"
+	"github.com/ErickHerreraISW/go_erp/internal/logger"
+	"github.com/ErickHerreraISW/go_erp/internal/products"
+	"github.com/ErickHerreraISW/go_erp/internal/users"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog/log"
-	"github.com/youruser/myapp/internal/config"
-	"github.com/youruser/myapp/internal/database"
-	apphttp "github.com/youruser/myapp/internal/http"
-	"github.com/youruser/myapp/internal/logger"
-	"github.com/youruser/myapp/internal/products"
-	"github.com/youruser/myapp/internal/users"
 )
 
 func main() {

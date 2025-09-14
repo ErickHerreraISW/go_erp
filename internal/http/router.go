@@ -4,12 +4,12 @@ import (
 	"net/http"
 	"time"
 
+	ih "github.com/ErickHerreraISW/go_erp/internal/http/middleware"
+	"github.com/ErickHerreraISW/go_erp/internal/products"
+	"github.com/ErickHerreraISW/go_erp/internal/users"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/jwtauth/v5"
-	ih "github.com/youruser/myapp/internal/http/middleware"
-	"github.com/youruser/myapp/internal/products"
-	"github.com/youruser/myapp/internal/users"
 )
 
 type RouterDeps struct {

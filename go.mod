@@ -1,4 +1,4 @@
-module github.com/youruser/myapp
+module github.com/ErickHerreraISW/go_erp
 
 go 1.22.0
 

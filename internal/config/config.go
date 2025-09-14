@@ -15,16 +15,19 @@ type Config struct {
 }
 
 func Load() *Config {
-	_ = godotenv.Load() // no falla si no existe
+
+	if err := godotenv.Load(); err != nil {
+		log.Println("[INFO] .env file not found, relying on environment variables")
+	}
 
 	cfg := &Config{
 		AppEnv:    getEnv("APP_ENV", "development"),
 		HTTPPort:  getEnv("HTTP_PORT", "8080"),
-		JWTSecret: getEnv("JWT_SECRET", "FE2A2B346D1593EFAEF74A9AE5735"),
-		DBURL:     getEnv("DATABASE_URL", "postgres://go:1234@localhost:5432/go_erp?sslmode=disable"),
+		JWTSecret: getEnv("JWT_SECRET", "change-me"),
+		DBURL:     getEnv("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/myapp?sslmode=disable"),
 	}
 
-	if cfg.JWTSecret == "FE2A2B346D1593EFAEF74A9AE5735" {
+	if cfg.JWTSecret == "change-me" {
 		log.Println("[WARN] JWT_SECRET usando valor por defecto. Cámbialo en producción.")
 	}
 	return cfg

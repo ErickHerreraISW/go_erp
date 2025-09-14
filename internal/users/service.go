@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
+	"github.com/ErickHerreraISW/go_erp/internal/pkg/hash"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog/log"
-	"github.com/youruser/myapp/internal/pkg/hash"
 )
 
 type Service interface {
