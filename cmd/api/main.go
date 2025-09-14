@@ -6,6 +6,7 @@ import (
 	"github.com/ErickHerreraISW/go_erp/internal/config"
 	"github.com/ErickHerreraISW/go_erp/internal/database"
 	"github.com/ErickHerreraISW/go_erp/internal/feature/erpinstance"
+	"github.com/ErickHerreraISW/go_erp/internal/feature/erpinstanceuser"
 	"github.com/ErickHerreraISW/go_erp/internal/feature/products"
 	"github.com/ErickHerreraISW/go_erp/internal/feature/users"
 	apphttp "github.com/ErickHerreraISW/go_erp/internal/http"
@@ -34,8 +35,10 @@ func main() {
 	erpInsRepo := erpinstance.NewRepository(db)
 	//erpInsSvc := erpinstance.NewService(erpInsRepo)
 
+	erpURepo := erpinstanceuser.NewRepository(db)
+
 	usrRepo := users.NewRepository(db)
-	usrSvc := users.NewService(usrRepo, erpInsRepo)
+	usrSvc := users.NewService(db, usrRepo, erpInsRepo, erpURepo)
 
 	prdRepo := products.NewRepository(db)
 	prdSvc := products.NewService(prdRepo)

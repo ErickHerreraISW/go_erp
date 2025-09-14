@@ -11,6 +11,13 @@ type CreateUserDTO struct {
 	Role     string `json:"role" validate:"omitempty,oneof=admin user"`
 }
 
+type CreateUserResponseDTO struct {
+	Name   string `json:"name"`
+	Email  string `json:"email"`
+	Role   string `json:"role"`
+	ErpKey string `json:"erp_key"`
+}
+
 type UpdateUserDTO struct {
 	Name string `json:"name" validate:"omitempty,min=2"`
 	Role string `json:"role" validate:"omitempty,oneof=admin user"`
