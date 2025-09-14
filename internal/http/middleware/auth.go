@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Guarda el request_id en el contexto para logs
+// RequestIDToContext Guarda el request_id en el contexto para logs
 func RequestIDToContext(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		id := r.Header.Get("X-Request-ID")

@@ -3,6 +3,7 @@ package users
 import "gorm.io/gorm"
 
 type Repository interface {
+	WithTx(tx *gorm.DB) Repository
 	Create(u *User) error
 	FindAll() ([]User, error)
 	FindByID(id uint) (*User, error)
@@ -14,6 +15,8 @@ type Repository interface {
 type repo struct{ db *gorm.DB }
 
 func NewRepository(db *gorm.DB) Repository { return &repo{db: db} }
+
+func (r *repo) WithTx(tx *gorm.DB) Repository { return &repo{db: tx} }
 
 func (r *repo) Create(u *User) error { return r.db.Create(u).Error }
 

@@ -5,16 +5,18 @@ import (
 
 	"github.com/ErickHerreraISW/go_erp/internal/config"
 	"github.com/ErickHerreraISW/go_erp/internal/database"
+	"github.com/ErickHerreraISW/go_erp/internal/feature/erpinstance"
+	"github.com/ErickHerreraISW/go_erp/internal/feature/products"
+	"github.com/ErickHerreraISW/go_erp/internal/feature/users"
 	apphttp "github.com/ErickHerreraISW/go_erp/internal/http"
 	"github.com/ErickHerreraISW/go_erp/internal/logger"
-	"github.com/ErickHerreraISW/go_erp/internal/products"
-	"github.com/ErickHerreraISW/go_erp/internal/users"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog/log"
 )
 
 func main() {
 	cfg := config.Load()
+	logger.Setup("Cargando .env")
 	logger.Setup(cfg.AppEnv)
 
 	db, err := database.New(cfg.DBURL)
@@ -28,8 +30,11 @@ func main() {
 	}
 
 	// DI manual
+	erpInsRepo := erpinstance.NewRepository(db)
+	//erpInsSvc := erpinstance.NewService(erpInsRepo)
+
 	usrRepo := users.NewRepository(db)
-	usrSvc := users.NewService(usrRepo)
+	usrSvc := users.NewService(usrRepo, erpInsRepo)
 
 	prdRepo := products.NewRepository(db)
 	prdSvc := products.NewService(prdRepo)

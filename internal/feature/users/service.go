@@ -4,9 +4,11 @@ import (
 	"errors"
 	"time"
 
+	"github.com/ErickHerreraISW/go_erp/internal/feature/erpinstance"
 	"github.com/ErickHerreraISW/go_erp/internal/pkg/hash"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog/log"
+	"gorm.io/gorm"
 )
 
 type Service interface {
@@ -18,15 +20,27 @@ type Service interface {
 	Login(dto LoginDTO, token *jwtauth.JWTAuth) (string, error)
 }
 
-type svc struct{ repo Repository }
+type svc struct {
+	db      *gorm.DB
+	repo    Repository
+	erpRepo erpinstance.Repository
+}
 
-func NewService(r Repository) Service { return &svc{repo: r} }
+func NewService(r Repository, er erpinstance.Repository) Service { return &svc{repo: r, erpRepo: er} }
 
 func (s *svc) Create(dto CreateUserDTO) (*User, error) {
 	if err := dto.Validate(); err != nil {
 		return nil, err
 	}
+
+	ue, _ := s.repo.FindByEmail(dto.Email)
+
+	if ue != nil {
+		return nil, errors.New("user with this email already exists")
+	}
+
 	h, err := hash.HashPassword(dto.Password)
+
 	if err != nil {
 		return nil, err
 	}
