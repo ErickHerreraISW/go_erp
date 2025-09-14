@@ -1,6 +1,8 @@
 package erpinstance
 
-import "time"
+import (
+	"time"
+)
 
 type ErpInstance struct {
 	ID        uint      `gorm:"primaryKey" json:"id"`

@@ -10,6 +10,7 @@ import (
 	"github.com/ErickHerreraISW/go_erp/internal/feature/users"
 	apphttp "github.com/ErickHerreraISW/go_erp/internal/http"
 	"github.com/ErickHerreraISW/go_erp/internal/logger"
+	"github.com/ErickHerreraISW/go_erp/internal/platform/migrations"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog/log"
 )
@@ -25,7 +26,7 @@ func main() {
 	}
 
 	// Auto-migraciones mínimas
-	if err := db.AutoMigrate(&users.User{}, &products.Product{}); err != nil {
+	if err := migrations.Run(db); err != nil {
 		log.Fatal().Err(err).Msg("migrations failed")
 	}
 
